@@ -1,8 +1,9 @@
 package com.example.cleanarchitecture
 
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-class RepoImpl : Repo {
+class RepoImpl @Inject constructor() : Repo {
     override suspend fun getData(): Result<User> {
 
         return try {
