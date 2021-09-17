@@ -8,16 +8,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel  @Inject constructor(private val repoImpl: RepoImpl) : ViewModel() {
-    val user= MutableLiveData<Result<User>>()
-//    val error= MutableLiveData<String>();
+class MainActivityViewModel  @Inject constructor(
+  private val getDataUseCase: getDataUseCase) : ViewModel() {
 
+    val user= MutableLiveData<Result<Array<ResponseItem>>>()
     fun getUserData(){
         user.postValue(Result.loading)
 
 
         viewModelScope.launch {
-            val result = getUserUseCase(repoImpl).invoke()
+            val result = getDataUseCase()
             user.postValue(result)
 
      }
